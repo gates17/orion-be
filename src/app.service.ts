@@ -5,7 +5,7 @@ import { KNEX_CONNECTION } from '@nestjsplus/knex';
 export class AppService {
   constructor(@Inject(KNEX_CONNECTION) private readonly knex) {}
 
-  async getCats() {
+  async getCats(): Promise<any> {
     return await this.knex('users')
       .select('*')
       .from('users');

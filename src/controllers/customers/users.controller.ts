@@ -7,13 +7,15 @@ import { User} from './interface/users.interface';
 export class CustomersController {
     constructor(private usersService: UsersService) {}
 
+    /*
     @Post()
     async create(@Body() createUserDto: CreateUserDto) {
-      this.usersService.create(createUserDto);
+      return this.usersService.create(createUserDto);
     }
+    */
   
-    @Get('users')
-    async findAll() {
+    @Get()
+    async findAll(): Promise<any> {
       return this.usersService.findAll();
     }
 }
