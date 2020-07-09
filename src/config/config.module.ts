@@ -1,13 +1,13 @@
 import { Module, Global } from '@nestjs/common';
 import { ConfigManagerModule } from '@nestjsplus/config';
 import { ConfigService } from './config.service';
-import { UsersController } from './users/users.controller';
+import { UsersController } from 'src/controllers/users/users.controller';
 
 @Global()
 @Module({
   imports: [
     ConfigManagerModule.register({
-      useFile: 'config/development.env',
+      allowMissingEnvFile: true,
     }),
   ],
   providers: [ConfigService],

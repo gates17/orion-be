@@ -1,19 +1,26 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './controllers/customers/users.module';
-
 import { KnexModule } from '@nestjsplus/knex';
-import { ConfigModule } from './config/config.module';
-import { ConfigService } from './config/config.service';
+import { UsersModule } from './controllers/users/users.module';
+
+
 
 @Module({
   imports: [
-    UsersModule,
-    ConfigModule,
-    KnexModule.registerAsync({
-      useExisting: ConfigService,
+    KnexModule.register({
+      client: 'pg',
+      version: '10.7',
+      connection: {
+        host: 'localhost',
+        user: 'postgres',
+        password: 'postgres',
+        database: 'tico',
+        port: 5432,
+      },
+      acquireConnectionTimeout: 10000,
     }),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
