@@ -1,10 +1,12 @@
+
+
 import { Controller, Get, Query, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/users.dto';
-import { User} from './interface/users.interface';
+import { CreateUserDto } from '../users/dto/users.dto';
+import { User} from '../users/interface/users.interface';
 
-@Controller('customers')
-export class CustomersController {
+@Controller('users')
+export class UsersController {
     constructor(private usersService: UsersService) {}
 
     /*
