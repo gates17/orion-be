@@ -16,7 +16,7 @@ export class ConfigService extends ConfigManager {
         debug: true,
         connection: {
           host : '127.0.0.1',
-          user : 'postgres',
+          user : 'gates17',
           password : 'postgres',
           database : 'tico',
           port: 5432,

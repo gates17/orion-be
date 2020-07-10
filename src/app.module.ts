@@ -10,12 +10,16 @@ import { UsersModule } from './controllers/users/users.module';
     KnexModule.register({
       client: 'pg',
       connection: {
-        host: '127.0.0.1',
-        user: 'postgres',
+        host: 'localhost',
+        user: 'gates17',
         password: 'postgres',
         database: 'tico',
         port: 5432,
       },
+      pool: {
+	      min: 2,
+	      max: 50,
+      }
      
     }),
     UsersModule,
