@@ -5,8 +5,4 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  async getCats(): Promise<any> {
-    return this.appService.getCats();
-  }
 }
