@@ -16,11 +16,8 @@ import { UsersModule } from './controllers/users/users.module';
         database: 'tico',
         port: 5432,
       },
-      pool: {
-	      min: 2,
-	      max: 50,
-      }
-     
+      debug:true,
+      acquireConnectionTimeout:2,
     }),
     UsersModule,
   ],

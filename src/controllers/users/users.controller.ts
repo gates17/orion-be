@@ -14,7 +14,7 @@ export class UsersController {
     //localhost:3000/users
     @Get()
     async findAll(): Promise<any> {
-      return this.usersService.findAll();
+      return this.usersService.test();
     }
 
     /*
