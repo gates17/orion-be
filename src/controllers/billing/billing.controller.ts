@@ -1,35 +1,36 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { BillingService } from './billing.service';
 
 @Controller('billing')
 export class BillingController {
-    constructor(private usersService: UsersService) {}
+    constructor(private billingService: BillingService) {}
    
     //localhost:3000/users
     @Get()
     async findAll(): Promise<any> {
-      return await this.usersService.findAll();
+      return await this.billingService.findAll();
     }
 
     
     @Post()
     async create(@Body() body):Promise<any> {
-      return await this.usersService.create(body);
+      return await this.billingService.create(body);
     }
 
     @Get(':id')
     async findOne(@Param('id') id: number): Promise<any> {
-      return await this.usersService.findOne(id);
+      return await this.billingService.findOne(id);
 
     }
   
     @Put(':id')
     async update(@Param('id') id: number,@Body() body): Promise<any> {
-      return await this.usersService.update(id, body);
+      return await this.billingService.update(id, body);
     }
   
     @Delete(':id')
     async remove(@Param('id') id: number): Promise<any> {
-      return this.usersService.delete(id);
+      return this.billingService.delete(id);
     }
     
 }

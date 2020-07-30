@@ -8,29 +8,13 @@ import { User} from '../users/interface/users.interface';
 @Controller('users')
 export class UsersController {
     constructor(private usersService: UsersService) {}
-
-    
    
     //localhost:3000/users
     @Get()
     async findAll(): Promise<any> {
-      //console.log(this.usersService.test());
       return await this.usersService.findAll();
     }
 
-    /*
-    @Post()
-    create(@Body() createCatDto: CreateCatDto) {
-      return 'This action adds a new cat';
-    }
-  
-    @Get()
-    findAll(@Query() query: ListAllEntities) {
-      return `This action returns all cats (limit: ${query.limit} items)`;
-    }
-    */
-
-    //localhost:3000/users/create
     
     @Post()
     async create(@Body() body):Promise<any> {

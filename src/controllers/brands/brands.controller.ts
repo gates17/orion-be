@@ -1,35 +1,36 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { BrandsService } from  './brands.service';
 
 @Controller('brands')
 export class BrandsController {
-    constructor(private usersService: UsersService) {}
+    constructor(private brandService: BrandsService) {}
    
     //localhost:3000/users
     @Get()
     async findAll(): Promise<any> {
-      return await this.usersService.findAll();
+      return await this.brandService.findAll();
     }
 
     
     @Post()
     async create(@Body() body):Promise<any> {
-      return await this.usersService.create(body);
+      return await this.brandService.create(body);
     }
 
     @Get(':id')
     async findOne(@Param('id') id: number): Promise<any> {
-      return await this.usersService.findOne(id);
+      return await this.brandService.findOne(id);
 
     }
   
     @Put(':id')
     async update(@Param('id') id: number,@Body() body): Promise<any> {
-      return await this.usersService.update(id, body);
+      return await this.brandService.update(id, body);
     }
   
     @Delete(':id')
     async remove(@Param('id') id: number): Promise<any> {
-      return this.usersService.delete(id);
+      return this.brandService.delete(id);
     }
     
 }
