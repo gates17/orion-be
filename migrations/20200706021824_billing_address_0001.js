@@ -1,12 +1,14 @@
-import * as Knex from "knex";
-
-
-export async function up(knex: Knex): Promise<any> {
+exports.up = function(knex){
 
     knex.schema.hasTable('billing_address').then(function(exists) {
         if (!exists) {
           return knex.schema.createTable('billing_address', function(table) {
-            table.increments(); // integer id
+            // integer id
+            table.increments('id').unsigned().primary(); 
+
+            // Client profile id
+            table.integer('profile_id').unsigned();
+            table.foreign('profile_id').references('id').inTable('profile');        
     
             // name
             table.text('street_name').notNullable();
@@ -28,6 +30,11 @@ export async function up(knex: Knex): Promise<any> {
     
             // updatedAt
             table.dateTime('updatedAt').notNullable();
+
+            // Updated by user
+            table.integer('updatedBy').unsigned();
+            table.foreign('updatedBy').references('id').inTable('users');
+
           });
         }
       });
@@ -35,20 +42,9 @@ export async function up(knex: Knex): Promise<any> {
 
 }
 
-
-export async function down(knex: Knex): Promise<any> {
+exports.down = function(knex) {
   return knex.schema.dropTableIfExists("billing_address");
-  /*
-  return knex.schema.hasTable('billing_address').then(function(exists) {
-    console.log(exists)
-      if (exists) {
-        return knex.schema.dropTable('billing_address')
-      }
-    })
-    .catch(function(error) {
-      console.error(error);
-    });
-  */
+
 }
 
 

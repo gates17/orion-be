@@ -9,37 +9,22 @@ export class UsersService {
    
 
     async findAll(): Promise<any> {
-        return await this.knex('users')
-        .select()
-        .from('users');
-    }
-
-    async test(): Promise<any> {
-        console.log('service')
+        let users = [];
+        const trx = await this.knex.transaction();
         try{
-            console.log('starting transaction')
-            this.knex.transaction(function(trx: any) {
-                console.log('executing transaction');
-                console.log( trx);
-                
-                return trx.select('*').from('users')//.transacting(trx)
-            })
-            .then(function() {
-                console.log('users displayed');
-            })
-            .catch(function(error) {
-                // If we get here, that means that neither the 'Old Books' catalogues insert,
-                // nor any of the books inserts will have taken place.
-                console.error(error);
-            });
+            users = await trx.table('users')
+                .select()
+                .from('users');
+                trx.commit();
+        }catch {
+            trx.rollback();
         }
-        finally{
-        }
+        return users;
     }
 
-    /*
-    async create(user: any): Promise<any> {
-        this.knex.push(user);
+    
+    async create(body: any): Promise<any> {
+        return await this.knex.table('users').insert(body);
     }
 
     async findOne(id:number): Promise<any> {
@@ -48,20 +33,21 @@ export class UsersService {
         .where('id', id);
     }
 
-    async update(id:number): Promise<any>{
-        this.knex('users')
+    async update(id:number, body: any): Promise<any>{
+        body["updatedAt"]=this.knex.fn.now();   
+        return await this.knex('users')
         .where('id', id)
-        .update({
-          fieldname: 'fieldvalue'
-        })
+        .update( 
+            body
+        )
     }
 
     async delete(id:number): Promise<any>{
-        this.knex('users')
+        return await this.knex('users')
         .where('id', id)
         .del()
         
     }
-    */
+    
 }
 

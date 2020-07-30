@@ -8,16 +8,15 @@ import { UsersModule } from './controllers/users/users.module';
 @Module({
   imports: [
     KnexModule.register({
-      client: 'pg',
+      client: 'mysql2',
       connection: {
         host: 'localhost',
-        user: 'gates17',
-        password: 'postgres',
+        user: 'root',
+        password: 'Br@gap017',
         database: 'tico',
-        port: 5432,
+        port: 3306,
       },
       debug:true,
-      acquireConnectionTimeout:2,
     }),
     UsersModule,
   ],

@@ -4,36 +4,34 @@ import { Controller, Get, Query, Post, Body, Put, Param, Delete } from '@nestjs/
 
 @Controller('products')
 export class ProductsController {
-  /*
-  @Post()
-  create(@Body() createCatDto: CreateCatDto) {
-    return 'This action adds a new cat';
+  constructor(private usersService: UsersService) {}
+   
+  //localhost:3000/users
+  @Get()
+  async findAll(): Promise<any> {
+    return await this.usersService.findAll();
   }
 
-  @Get()
-  findAll(@Query() query: ListAllEntities) {
-    return `This action returns all cats (limit: ${query.limit} items)`;
+  
+  @Post()
+  async create(@Body() body):Promise<any> {
+    return await this.usersService.create(body);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return `This action returns a #${id} cat`;
+  async findOne(@Param('id') id: number): Promise<any> {
+    return await this.usersService.findOne(id);
+
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
-    return `This action updates a #${id} cat`;
+  async update(@Param('id') id: number,@Body() body): Promise<any> {
+    return await this.usersService.update(id, body);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return `This action removes a #${id} cat`;
+  async remove(@Param('id') id: number): Promise<any> {
+    return this.usersService.delete(id);
   }
-  */
-  /*
-  @Get()
-    findAll(@Req() request: Request): string {
-      return 'This action returns all cats';
-    }
-  */
+  
 }

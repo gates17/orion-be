@@ -3,27 +3,22 @@
 module.exports = {
 
   development: {
-    client: 'pg',
+    client: 'mysql2',
     connection: {
       host: 'localhost',
-      user: 'gates17',
-      password: 'postgres',
+      user: 'root',
+      password: 'Br@gap017',
       database: 'tico',
-      port: 5432,
+      port: 3306,
     },
-    debug: true,
-    pool: {
-      min:2,
-      max:50,
-    },
-    acquireConnectionTimeout: 10000,
+   
     migrations: {
       directory:  './migrations',
       sortDirsSeparately: false,
     },
     seeds: {
       directory: './seeds/dev',
-    }
+    },
   },
 
   staging: {

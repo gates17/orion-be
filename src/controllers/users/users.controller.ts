@@ -14,7 +14,8 @@ export class UsersController {
     //localhost:3000/users
     @Get()
     async findAll(): Promise<any> {
-      return this.usersService.test();
+      //console.log(this.usersService.test());
+      return await this.usersService.findAll();
     }
 
     /*
@@ -30,26 +31,26 @@ export class UsersController {
     */
 
     //localhost:3000/users/create
-    /*
-    @Post('create')
-    async create():Promise<any> {
-      return  this.usersService.create('user');
+    
+    @Post()
+    async create(@Body() body):Promise<any> {
+      return await this.usersService.create(body);
     }
 
     @Get(':id')
-    findOne(@Param('id') id: number): Promise<any> {
-      return this.usersService.findOne(id);
+    async findOne(@Param('id') id: number): Promise<any> {
+      return await this.usersService.findOne(id);
 
     }
   
-    @Put('update/:id')
-    update(@Param('id') id: number): Promise<any> {
-      return this.usersService.update(id);
+    @Put(':id')
+    async update(@Param('id') id: number,@Body() body): Promise<any> {
+      return await this.usersService.update(id, body);
     }
   
-    @Delete('delete/:id')
-    remove(@Param('id') id: number): Promise<any> {
+    @Delete(':id')
+    async remove(@Param('id') id: number): Promise<any> {
       return this.usersService.delete(id);
     }
-    */
+    
 }

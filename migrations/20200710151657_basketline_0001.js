@@ -1,11 +1,8 @@
-import * as Knex from "knex";
+exports.up = function(knex) {  
 
-
-export async function up(knex: Knex): Promise<any> {
-
-    knex.schema.createTableIfNotExists("basketline", function (table) {
+    return knex.schema.createTableIfNotExists("basketline", function (table) {
         // integer id
-        table.increments(); 
+        table.increments('id').unsigned().primary(); 
     
         //order
         table.string('order_id').unique().notNullable();
@@ -37,7 +34,7 @@ export async function up(knex: Knex): Promise<any> {
 
 }
 
-
-export async function down(knex: Knex): Promise<any> {
+exports.down = function(knex) {  
+    return knex.schema.dropTableIfExists("basketline");
 }
 
